@@ -1,61 +1,69 @@
-alert("Bienvenida a la tienda");
+function saludo(){
+    alert("hola bienvenido a la tienda");
+}
 
-let sum = 0;
 
+let sum =0; 
 
+function tienda(){
     
-    let seleccionpren = prompt("1) Remera nike $1000 talle m 2) pantalon puma $1400 talle s 3) buzo america $1200 talle xl 4) calza calor $1500 talle m 0) Salir");
-    
-    function tienda(){
-     while (seleccionpren!== 0){
-        switch (seleccionpren) {
-            case "1":
-                sum = parseInt(sum + 1000)
-                alert(`remera nike $1000 talle m `)
-                break;
-            case "2":
-                sum = parseInt(sum + 1400)
-                alert(`pantalon $1400 talle s `)
-                break;
-            case "3":
-                sum = parseInt(sum + 1200)
-                alert(`buzo $1200 talle xl `)
-                break;
-            case "4":
-                acumulado = parseInt(sum + 1500)
-                alert(`calza $1500 talle m `)
-                break;
-           
-            default:
-                alert(`No seleccionaste ninguna prenda`)
-                break;
+    let seleccionpren = prompt(`${bucleropa}  0) Salir`);
+
+    while (seleccionpren!= 0){
+        if(seleccionpren == ropas[0].id){
+            
+            sum += parseInt(`${ropas[0].precio}`);
+            alert(`elegiste: ${ropas[0].tipo}, ${ropas[0].talle}. carrito: $${sum}`);
+
+        }else if(seleccionpren == ropas[1].id){
+
+            
+            alert(`${ropas[1].tipo}, ${ropas[1].talle}. carrito: $${sum}`);
+            sum += parseInt(`${ropas[1].precio}`);
+            
+
+        }else if(seleccionpren == ropas[2].id){
+
+            
+            sum += parseInt(`${ropas[2].precio}`);
+            alert(`prenda: ${ropas[2].tipo}, ${ropas[2].talle}. carrito: $${sum}`);
+
+        }else if(seleccionpren == ropas[3].id){
+
+            
+            sum += parseInt(`${ropas[3].precio}`);
+            alert(`${ropas[3].tipo}, ${ropas[3].talle}. carrito: $${sum}`);
+
+        }else{
+            alert(`no seleccionaste ninguna prenda`);
         }
-        let seleccionpren = prompt(`
-    1) Remera nike $1000 talle m
-    2) pantalon puma $1400 talle s
-    3) buzo america $1200 talle xl
-    4) calza calor $1500 talle m 
-    
-    0) Salir
-    `);
+        seleccionpren = prompt(`${bucleropa}  
+         0) Salir  
+         carrito: $${sum}`);
+
+        
     }
-    alert(`total de la factura : $${sum}`)
+
+    alert(`total carrito $${sum}.`);
+    
 }
 
 
 
+
 class prendas{
-    constructor(tipo,precio,talle){
+    constructor(id,tipo,precio,talle){
+        this.id = id;
         this.tipo=tipo
         this.precio=precio
         this.talle=talle
     }
 }
 
-let prendas1 = new prendas("remera",1000,"m")
-let prendas2 = new prendas("pantalon",1400,"s")
-let prendas3 = new prendas("buzo",1200,"xl")
-let prendas4 = new prendas("calza",1500,"m")
+let prendas1 = new prendas(1,"remera",1000,"m")
+let prendas2 = new prendas(2,"pantalon",1400,"s")
+let prendas3 = new prendas(3,"buzo",1200,"xl")
+let prendas4 = new prendas(4,"calza",1500,"m")
 
 const ropas= []
 
@@ -64,10 +72,21 @@ ropas.push(prendas2)
 ropas.push(prendas3)
 ropas.push(prendas4)
 
-console.log(ropas)
+let bucleropa = ``
+for(let i = 0; i < ropas.length; i++){
+    bucleropa +=`${ropas[i].id}) ${ropas[i].tipo} -$${ropas[i].precio}, ${ropas[i].talle}
+    `
+}
 
+
+console.log(ropas)
 //filtrar por precio 
 
 let preciomenor1400 = ropas.filter(prendas =>prendas.precio <= 1400)
 
+
 console.log(preciomenor1400)
+
+
+saludo();
+tienda();
