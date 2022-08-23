@@ -87,6 +87,30 @@ let preciomenor1400 = ropas.filter(prendas =>prendas.precio <= 1400)
 
 console.log(preciomenor1400)
 
+const productos = [
+    {id:1,ropa: "remera",precio: 1000,talle: `m`},
 
+    {id:2,ropa:"pantalon",precio: 1400,talle: "s"},
+    
+    {id:3,ropa:"buzo",precio: 1200,talle: "xl"},
+    
+    {id:4,ropa:"calza",precio: 1500,talle: "m"},
+];
+
+function renderproducts(){
+    let html = ``;
+    for(let i = 0; i< productos.length; i++){
+        html = html + `
+        <div>
+        <p>id: ${productos[i].id}</p>
+        <p>ropa: ${productos[i].ropa}</p>
+        <p>precio: $ ${productos[i].precio}</p>
+        <p>talle: ${productos[i].talle}</p> 
+        </div>`
+
+    }
+    document.getElementById("div-productos").innerHTML = html;
+}
 saludo();
 tienda();
+renderproducts();
