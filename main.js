@@ -1,19 +1,43 @@
-function saludo(){
-    let html = "";
+let cart = JSON.parse(localStorage.getItem("productoscarrito")) || [];
 
-    html = html +`
-    <div>
-        <h1>hola bienvenido a la tienda</h1>
+function renderCart() {
+
+  let cartRopa = [...cart]
+
+
+  let html = '';
+  for (let i = 0; i < cart.length; i++) {
+    html =
+      html +
+      `
+    <div style="border: 1px solid green;margin: 10px;">
+    <p>id: ${productos[i].id}</p>
+    <p>ropa: ${productos[i].ropa}</p>
+    <p>precio: ${productos[i].precio}</p>
+    <p>talle: ${productos[i].talle}</p>
+    <p>
+      <img  src="${productos[i].img}" />
+    </p>
+    <span style="cursor:pointer;" onclick="removeFromCart(${i});">🛒</span>
     </div>
     `;
-    document.getElementById("titulo").innerHTML = html;
-    /*alert("hola bienvenido a la tienda");*/
+  }
+  document.getElementById('div-cart').innerHTML = html;
+}
+renderCart();
+
+
+let savetolocalstorage =() =>{
+
+  let storageJSON = JSON.stringify(cart);
+  localStorage.setItem("productoscarrito", storageJSON);
+
 }
 
 
 
-const productos = [
-    {id:1, ropa: "remera", precio: 1000, talle: `m`},
+let productos = [
+  {id:1, ropa: "remera", precio: 1000, talle: `m`, img: `https://www.dexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw14ee3e74/products/AD_GL7502/AD_GL7502-1.JPG`},
 
     {id:2, ropa:"pantalon", precio: 1400, talle: "s"},
     
@@ -22,55 +46,52 @@ const productos = [
     {id:4, ropa:"calza", precio: 1500, talle: "m"},
 ];
 
-let car = [];
-/*eventos -----------------------------------------------------*/
+
+let promo = ({ropa,  talle}) =>{
+  console.log(`ultima unidad de "${ropa}", talle:  ${talle} 20% de descuento`)
+}
+promo(productos[3]);
+
+
+
+
 function renderproductos() {
-    let html = "";
-    for(let i = 0; i< productos.length; i++){
-        html = html + `
-        <div onclick="addtocar(${productos[i].id});" style="border: 1px solid green;margin: 10px;">
-        <p>id: ${productos[i].id}</p>
-        <p>ropa: ${productos[i].ropa}</p>
-        <p>precio: $ ${productos[i].precio}</p>
-        <p>talle: ${productos[i].talle}</p> 
-        </div>`
+  let html = '';
+  for (let i = 0; i < productos.length; i++) {
+    html =
+      html +
+      `
+    <div onclick="addToCart(${productos[i].id});" style="border: 1px solid green;margin: 10px;">
+      <p>id: ${productos[i].id}</p>
+      <p>ropa: ${productos[i].ropa}</p>
+      <p>precio: ${productos[i].precio}</p>
+      <p>talle: ${productos[i].talle}</p>
+      <p>
+        <img style="width:200px;height:200px;" src="${productos[i].img}" />
+      </p>
+      </div>
+    `;
 
-    }
-    document.getElementById("div-productos").innerHTML = html;
-}
-
-
-function rendercar() {
-    let html = '';
-    for(let i = 0; i<car.length; i++){
-        html = html +
-         `
-        <div style="border: 1px solid;">
-        <p>id: ${car[i].id}</p>
-        <p>ropa: ${car[i].ropa}</p>
-        <p>precio: $ ${car[i].precio}</p>
-        <p>talle: ${car[i].talle}</p> 
-        <span style="cursor:pointer;" onclick="removeFromcar(${i});">🛒</span>
-        </div>
-        `;
-
-    }
-    document.getElementById("div-car").innerHTML = html;
-}
-
-function addtocar(id){
-    const foundProductos = productos.find((item)=> item.id == id);
-    car.push(foundProductos);
-    rendercar();
-}
-
-function removeFromCar(id){
-    
-    car.splice(id, 1);
-    rendercar();
-
+    document.getElementById('div-productos').innerHTML = html;
   }
-saludo();
+  
+}
+
 renderproductos();
 
 
+
+function addToCart(id) {
+  const foundProduct = productos.find((item) => item.id == id);
+  cart.push(foundProduct);
+  renderCart();
+  savetolocalstorage();
+}
+
+function removeFromCart(id) {
+  cart.splice(id, 1);
+  renderCart();
+  savetolocalstorage();
+}
+
+renderproductos();
