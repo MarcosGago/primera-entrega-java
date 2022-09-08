@@ -1,3 +1,11 @@
+Swal.fire({
+  title: 'Bienvenido!',
+  text: 'aprobecha nuestras ofertas',
+  icon: 'success',
+  confirmButtonText: 'quiero'
+})
+
+
 let cart = JSON.parse(localStorage.getItem("productoscarrito")) || [];
 
 function renderCart() {
