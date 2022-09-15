@@ -44,7 +44,7 @@ let savetolocalstorage =() =>{
 
 
 
-let productos = [
+/*let productos = [
   {id:1, ropa: "remera", precio: 1000, talle: `m`, img: `https://www.dexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw14ee3e74/products/AD_GL7502/AD_GL7502-1.JPG`},
 
     {id:2, ropa:"pantalon", precio: 1400, talle: "s"},
@@ -53,7 +53,7 @@ let productos = [
     
     {id:4, ropa:"calza", precio: 1500, talle: "m"},
 ];
-
+*/
 
 let promo = ({ropa,  talle}) =>{
   console.log(`ultima unidad de "${ropa}", talle:  ${talle} 20% de descuento`)
@@ -64,6 +64,10 @@ promo(productos[3]);
 
 
 function renderproductos() {
+
+  fetch("../api.json")
+  .then((res) => res.json())
+  .then((productos) => {
   let html = '';
   for (let i = 0; i < productos.length; i++) {
     html =
@@ -79,21 +83,35 @@ function renderproductos() {
       </p>
       </div>
     `;
-
+  };
     document.getElementById('div-productos').innerHTML = html;
-  }
+  })
+  .catch((e) => {
+    console.log(e);
+  });
   
-}
+ }
+
+
 
 renderproductos();
 
 
 
 function addToCart(id) {
+  fetch("../api.json")
+    .then((res) => res.json())
+    .then((productos) => {
+
   const foundProduct = productos.find((item) => item.id == id);
   cart.push(foundProduct);
   renderCart();
   savetolocalstorage();
+
+  })
+    .catch((e) => {
+     console.log(e);
+  });
 }
 
 function removeFromCart(id) {

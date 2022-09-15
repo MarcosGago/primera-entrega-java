@@ -1,0 +1,11 @@
+[
+    {"id":1, "ropa": "remera", "precio": 1000, "talle": "m", "img": "https://www.dexter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw14ee3e74/products/AD_GL7502/AD_GL7502-1.JPG"},
+  
+      {"id":2, "ropa":"pantalon", "precio": 1400, "talle": "s"},
+      
+      {"id":3, "ropa":"buzo", "precio": 1200, "talle": "xl"},
+      
+      {"id":4, "ropa":"calza", "precio": 1500, "talle": "m"}
+
+  ]
+  
